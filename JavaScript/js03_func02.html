@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script type="text/javascript">
+	// 1. 명시적 함수, 이름이 있는 함수!
+	function func01(){
+		// ; 생략 가능. 단, 한 줄에 여러 명령을 사용하는 경우엔 생략 불가능
+		// alert("명시적 함수"); alert("이름이 있는 함수!") <- 사용 가능 
+		alert("명시적 함수")
+		alert("이름이 있는 함수!")
+	}
+	
+	// 2. 익명 함수 : 함수긴 함수인데 값이다. 함수가 값으로 돼서 func02라는 변수에 저장되어있다. func02에 저장된게 함수라서 ();로 호출할 수 있다. 
+	// 아래의 코드는 ()안에 값을 넣어서 실행해보았다. func02변수 안에 있는 함수를 호출할건데 해당 함수에 파라미터 i에다가 아규먼트100을 넣어서 실행할거야 
+	var func02 = function(i) {
+		alert("익명 함수 - 이름이 없는 함수!" + i);
+	}
+	
+	// 3. 리터럴 함수 
+	function literalPrn(myliteral){
+		myliteral("안녕하세요, 리터럴 입니다.");
+	}
+	
+	function func03(){
+		
+		literalPrn(function(msg) {
+			alert(msg);
+		});
+	}
+	
+						
+	// 1. func03에서 literalPrn함수를 호출, 호출하는데 파라미터가 있음. 
+	// 2. literalPrn 함수를 호출하면서, 아규먼트로 익명함수를 전달
+	// 3. 파라미터에 저장된 함수를 실행
+	// 4. 전달된 함수에 파라미터가 있다. 그럼 실행하기위해 아규먼트값 "안녕하세요, 리터럴입니다."를 msg에 넣는다.
+	
+	//정리
+	// 1. fun03에서 literalPrn함수를 호출
+	// 2. 리터럴피알엔 함수를 호출하면서, 파라미터(myliteal)가 있어서 파라미터값을 넣어서 호출 후 값 전달 
+	// 3 리터럴피알엔이라는 함수 안에서 myliteral 이라는 변수에 파라미터 안에 저장된 함수를 실행
+	// 4. 실행 하기 위해 아규먼트값 넣어서 실행
+
+	
+	
+	// func03이 literalprn함수를 호출했는데, 
+	// literalprn함수에 파라미터 my literal가 있어서
+	// 아규먼트로 익명함수를 전달하고 실행할 때 거기에 "안녕하세요. 리터럴입니다."
+	
+	function valTest() {
+		var msg = "qclass";
+		for (var i = 0; i < arguments.length; i++) {
+			msg += arguments[i]+"";
+		}
+		alert(msg);
+	}
+	
+	// closure : 내부함수(자식)가 외부함수(부모)의 변수, 파라미터 등에 접근 가능!
+	function closureTest(val){
+		var msg = "!!!";
+		function addVal(){
+			alert(val+msg);
+		}       // Servlet+!가 됨 
+		
+		return addVal
+	}
+	
+	var amEdu=closureTest('Servlet');
+	
+	function pmEdu(val){
+		closureTest(val)(); 
+		//var tmp = closureTest(val);
+		//tmp(); 위와 같은 뜻. 풀어쓰면 이거다
+	}
+	
+	var t = function test(){
+		alert("javascript 재밌다!!!");
+	}();
+</script>
+
+
+</head>
+<body>
+
+	<h1>함수!</h1>
+	
+	<h2>함수의 종류</h2>
+	
+	<p onclick="func01()">1.명시적 함수</p>
+	<p onclick="func02(100)">2.익명 함수</p> //이름없음
+	<p onclick="func03()">3.리터럴 함수(함수 리터럴)</p>
+	
+	<h2 onclick="valTest('멋쟁이', '최고', '짱이야!')">args(arguments) 속성</h2>
+	
+	<h2>클로저 (내부함수)</h2>
+	
+	<label for="am">오전강의</label>
+	<input type="text" id="am" />
+	<input type="button" value="클릭!" onclick="amEdu();">
+	
+	<hr/>
+	
+	<label for="pm">오후강의</label>
+	<input type="text" id="pm" />
+	<input type="button" value="클릭!" onclick="pmEdu(pm.value);" />
+	
+	
+	
+</body>
+</html>
