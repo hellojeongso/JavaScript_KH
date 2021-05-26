@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script type="text/javascript">
+
+	function popUp(){
+		// open() : 경로, 이름, 옵션을 지정해줄 수 있다. 옵션을 지정해주지 않으면 새로운 탭에서 열린다. 
+		window.open("js13_popup02.html", "", "width=300px, height=300px");
+	}
+	
+	/*
+		window는 자바스크립트의 최상위 객체이다.
+		alert도 원래는 window.alert인데 window 생략한 것
+		onload=function()도 원래는 앞에 window가 있는데 생략된 것
+		
+	*/
+
+</script>
+</head>
+<body>
+
+</body>
+
+	<button onclick="popUp();">팝업창!</button>
+</html>
