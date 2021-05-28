@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<style type="text/css">
+	
+	img{
+		vertical-align:middle;
+		width:300px;
+		height:300px;
+	}
+	a{
+		font-size: 30px;
+		text-decoration: none;
+	}
+	
+</style>
+
+<script type="text/javascript">
+	// 페이지 화면이 로딩된 후에 function안에 있는 무언가를 실행해라!
+	window.onload=function(){
+		var anchs = document.querySelectorAll("a");
+		var img = document.querySelector("img");
+		var count = 1;
+		
+		anchs[0].click=function(){
+			var imgAlt = img.getAttribute("alt");	
+			if (imgAlt == "img01") {
+				count = 6;
+				img.setAttribute("alt", "img0"+count);
+				img.setAttribute("src", "resources/image/img0"+count+".PNG0");
+			} else {
+			
+				img.setAttribute("alt", "img0" + (--count));
+				img.setAttribute("src", "resources/image/img0"+count+".PNG");
+			}
+			
+		}
+		
+		anchs[1].onclick=function(){
+			var imgAlt = img.getAttribute("alt");
+			if (imgAlt == "img06") {
+				count = 1;
+			} else {
+				count ++;
+			}
+			img.setAttribute("alt", "img0"+count);
+			img.setAttribute("src", "resources/image/img0"+count+".PNG");
+			}
+		}
+			
+		
+
+
+</script>
+</head>
+<body>
+
+	<div>
+		<a href="#">◀</a>
+		<img alt="img01" src="resources/image/img01.PNG"/>
+		<a href="#">▶</a>
+	</div>
+</body>
+</html>
