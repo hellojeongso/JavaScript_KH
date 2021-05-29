@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>js22</title>
+
+<script type="text/javascript">
+	/*추가*/
+	function tableVal(){
+		// 한 파일 안에 form 태그 2개가 존재할 경우, 첫번째 form
+		var doc = document.forms[0];
+		// doc(폼).하면 name이 name이 id인 애를 데리고 와
+		// doc안에서 name이 pw인 애 값 가지고와..~ 
+		var vals = [doc.id.value, doc.pw.value, doc.addr.value, doc.phone.value];
+		
+		// 배열의 주소값을 가져와서 null,공백,undefined일 경우 "모두 다 입력해주세요" 알림창 뜨게 설정
+		// 유효성 검사(유효값 처리)
+		for(var i = 0; i < vals.length; i++){
+			if(vals[i] == null || vals[i]=="" || vals[i]==undefined){
+				alert("모두 다 입력해 주세요!!");
+				
+				// 함수 안에서 return쓰면 함수 자체를 종료시킨다. 
+				return;
+			}
+		}
+		// 그게 아니라면 addtr에 입력하고, createRow의 노드 리스트 마지막에 추가한다. ?
+		// createRow에 전달 
+		document.getElementById("addtr").appendChild(createRow(vals));
+	}
+
+	function createRow(vals){
+		// tr 개체를 생성한다.  
+		var tr = document.createElement("tr");
+		// <tr></tr>
+		
+		
+		// tr 개체가 생성된 만큼 td도 생성한다..? ? ? 
+		for(var i = 0;i<vals.length;i++){
+			var td = document.createElement("td");
+			// <td></td>
+			// <td></td>
+			// <td></td>
+			td.textContent=vals[i];
+			// 0번지값부터 <td>id값</td>
+			// 1번지값 <td>pw</td>
+			// 2번지값 <td>addr</td>
+			// 3번지값 <td>phone</td>
+			tr.appendChild(td);
+			// <tr><td>id</td></tr><td>pw</td><tr>.. 
+		}
+		
+		// td(row) 개체를 생성한다. 
+		var dTd = document.createElement("td");
+		//<td><td>
+		
+		// innerHTML을 통해서 dTd 변수에 값을 넣어준다. 
+		dTd.innerHTML="<input type='button' value='삭제' onclick='delRow(this)'>";
+		// tr에 자식요소를 추가한다.
+		// <td><<input type='button' value='삭제' onclick='delRow(this)'></td>
+		tr.appendChild(dTd);
+		// <tr>
+		//	<td>id</td>
+		// 	<td>pw</td>
+		//	<td>addr</td>
+		//	<td>phone</td>
+		//	<td><input type='button' value='삭제' onclick='delRow(this)'></td>
+		// </tr>
+		return tr;
+	}
+	
+	/*삭제*/
+	function deleteVal(){
+		// tbody에 addtr의 존재가 true인지 체크하고 마지막 자식 노드를 지운다. 
+		var tbody = document.getElementById("addtr");
+		while(tbody.hasChildNodes()) { 
+			tbody.removeChild(tbody.lastChild ); 
+		} 
+
+	}
+	
+	function delRow(ele){
+		//삭제 버튼 누른 줄 하나를 지우자 
+		// <tr>
+		//	<td>id</td>
+		// 	<td>pw</td>
+		//	<td>addr</td>
+		//	<td>phone</td>
+		//	<td><input type='button' value='삭제' onclick='delRow(this)'></td>
+		// </tr>
+		
+		// delRow(this)는 누굴 뜻하냐 : 자기 자신, 여기서 this는 input태그를 말한다.
+		// ele->this->this는 input, input은 버튼
+		// ele는 <input type='button' value='삭제' onclick='delRow(this)'>
+		// parentNode는 ......확인하기 무튼 한줄! 
+		var delTr = ele.parentNode.parentNode;
+		var tbody = document.getElementById("addtr");
+		tbody.removeChild(delTr);
+	}
+
+</script>
+
+
+</head>
+<body>
+
+	<form>
+		<table id="intable">
+			<tr>
+				<td>아이디:</td>
+				<td><input type="text" name="id"/></td>
+			</tr>
+			<tr>
+				<td>비밀번호:</td>
+				<td><input type="text" name="pw"/></td>
+			</tr>
+			<tr>
+				<td>주소:</td>
+				<td><input type="text" name="addr"/></td>
+			</tr>
+			<tr>
+				<td>전화번호:</td>
+				<td><input type="text" name="phone"/></td>
+			</tr>
+		</table>
+		<input type="button" value="추가" onclick="tableVal();" />
+		<input type="button" value="삭제" onclick="deleteVal();" />
+	</form>
+	
+	<div id="addtable">
+		<table border="1" id="ctb">
+			<col width="100px"/>
+			<col width="100px"/>
+			<col width="300px"/>
+			<col width="200px"/>
+			<col width="100px"/>
+			<thead>
+				<tr>
+					<th>아이디</th>
+					<th>비밀번호</th>
+					<th>주소</th>
+					<th>전화번호</th>
+					<th>삭제</th>
+				</tr>
+			</thead>
+			<tbody id="addtr">
+			</tbody>
+		</table>
+	</div>
+	
+	
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
